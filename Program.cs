@@ -1,32 +1,33 @@
 ﻿Console.WriteLine("Введіть блок для виконання завдання ( 1 або 2 )");
 var num = Console.ReadLine();
+
+var arr = InputJaggedArray();
+
 switch (num) {
     case "1":
         //Block_1();
         break;
     case "2":
-        Block_2();
+        Block_2(arr);
         break;
     default:
         Console.WriteLine("Ви ввели щось не зрозуміле (((");
         break;
 }
 
-static void Block_2() {
-    int[][] jaggedArray = InputJaggedArray();
-
-    if (jaggedArray == null || jaggedArray.Length == 0) {
+static void Block_2(int[][] arr) {
+    if (arr == null || arr.Length == 0) {
         Console.WriteLine("Масив порожній.");
         return;
     }
 
     Console.WriteLine("Початковий зубчастий масив:");
-    PrintJaggedArray(jaggedArray);
+    PrintJaggedArray(arr);
 
-    RemoveEvenRows(ref jaggedArray);
+    RemoveEvenRows(ref arr);
 
     Console.WriteLine("Масив після видалення парних рядків (0, 2, 4...):");
-    PrintJaggedArray(jaggedArray);
+    PrintJaggedArray(arr);
 }
 
 static void RemoveEvenRows(ref int[][] arr) {
