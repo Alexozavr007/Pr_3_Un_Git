@@ -1,18 +1,23 @@
 ﻿Console.WriteLine("Введіть блок для виконання завдання ( 1 або 2 )");
 var num = Console.ReadLine();
-
+bool e = true;
 var arr = InputJaggedArray();
-
-switch (num) {
-    case "1":
-        //Block_1();
-        break;
-    case "2":
-        Block_2(arr);
-        break;
-    default:
-        Console.WriteLine("Ви ввели щось не зрозуміле (((");
-        break;
+while (e)
+{
+    switch (num)
+    {
+        case "1":
+            Block2();
+            break;
+        case "2":
+            Block_2(arr);
+            break;
+        default:
+            Console.WriteLine("Ви ввели щось не зрозуміле (((");
+            break;
+    }
+    Console.WriteLine("чи продовжувати далі змінювати масив? (true or false)");
+    e = bool.Parse(Console.ReadLine());
 }
 
 static void Block_2(int[][] arr) {
@@ -71,4 +76,103 @@ static void PrintJaggedArray(int[][] arr) {
         Console.Write($"Рядок {i}: ");
         Console.WriteLine(string.Join(", ", arr[i]));
     }
+}
+static int[][] ReadJaggedManual()
+{
+    Console.Write("Введіть кількість рядків: ");
+    int rows = int.Parse(Console.ReadLine());
+    int[][] jagged = new int[rows][];
+
+    for (int i = 0; i < rows; i++)
+    {
+        Console.Write($"Введіть кількість елементів у рядку {i}: ");
+        int cols = int.Parse(Console.ReadLine());
+        jagged[i] = new int[cols];
+
+        for (int j = 0; j < cols; j++)
+        {
+            Console.Write($"jagged[{i}][{j}] = ");
+            jagged[i][j] = int.Parse(Console.ReadLine());
+        }
+    }
+    return jagged;
+}
+
+static int[][] ReadJaggedRandom()
+{
+    Random rnd = new Random();
+    Console.Write("Введіть кількість рядків: ");
+    int rows = int.Parse(Console.ReadLine());
+    int[][] jagged = new int[rows][];
+
+    for (int i = 0; i < rows; i++)
+    {
+        int cols = rnd.Next(1, 11);
+        jagged[i] = new int[cols];
+
+        for (int j = 0; j < cols; j++)
+        {
+            jagged[i][j] = rnd.Next(0, 51);
+        }
+    }
+    return jagged;
+}
+static void PrintJagged(int[][] jagged)
+{
+    for (int i = 0; i < jagged.Length; i++)
+    {
+        Console.WriteLine($"Рядок {i + 1}: " + string.Join(" ", jagged[i]));
+    }
+}
+static void Block2()
+{
+    int[][] arr;
+    Console.WriteLine("Виберыть спосіб заповнення 1 - рандом, 2 - в ручну:");
+    int a = int.Parse(Console.ReadLine());
+    if (a == 1)
+        arr = ReadJaggedRandom();
+    else
+        arr = ReadJaggedManual();
+    PrintJagged(arr);
+    z8(ref arr);
+    PrintJagged(arr);
+}
+static void z8(ref int[][] arr)
+{
+    int maxcol = 0;
+    int maxrow = 0;
+    for (int i = 0; i < arr.Length; i++)
+    {
+        for (int j = 0; j < arr[i].Length; j++)
+        {
+            if (arr[i][j] > arr[maxrow][maxcol])
+            {
+                maxrow = i;
+                maxcol = j;
+            }
+        }
+    }
+    DeleteRow(ref arr, maxrow);
+}
+static void DeleteRow(ref int[][] jagged, int k)
+{
+    if (jagged == null || k < 0 || k >= jagged.Length)
+    {
+        Console.WriteLine("Помилка: такого рядка не існує. Масив не змінено.");
+        return;
+    }
+
+    int[][] newJagged = new int[jagged.Length - 1][];
+
+    for (int i = 0; i < k; i++)
+    {
+        newJagged[i] = jagged[i];
+    }
+
+    for (int i = k + 1; i < jagged.Length; i++)
+    {
+        newJagged[i - 1] = jagged[i];
+    }
+
+    jagged = newJagged;
 }
