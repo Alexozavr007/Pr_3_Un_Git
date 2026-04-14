@@ -1,4 +1,6 @@
-﻿bool e = true;
+﻿Console.OutputEncoding = System.Text.Encoding.UTF8;
+Console.InputEncoding = System.Text.Encoding.UTF8;
+bool e = true;
 Console.WriteLine("Введыть масив для обробки");
 var arr = ReadJaggedRandom();
 while (e)
@@ -42,7 +44,7 @@ static int[][] ReadJaggedRandom()
 }
 static void PrintJaggedArray(int[][] arr) {
     for (int i = 0; i < arr.Length; i++) {
-        Console.Write($"Рядок {i}: ");
+        Console.Write($"Рядок {i + 1}: ");
         Console.WriteLine(string.Join(", ", arr[i]));
     }
 }
