@@ -74,7 +74,7 @@ static void Block_2_Max(ref int[][] arr)
 }
 static void Block_2_Illia(ref int[][] arr)
 {
-    if (newArr == null || newArr.Length == 0)
+    if (arr == null || arr.Length == 0)
     {
         Console.WriteLine("Масив порожній.");
         return;
@@ -149,10 +149,11 @@ static void DeleteRow(ref int[][] jagged, int k)
     jagged = newJagged;
 }
 //Illia methods
-static int[][] DeleteEvenRows(ref int[][] initialData)
+static void DeleteEvenRows(ref int[][] initialData)
 {
     int index = 0;
-    int[][] newArr = new int[initialData.Length / 2][];
+    int newSize = (initialData.Length + 1) / 2;
+    int[][] newArr = new int[newSize][];
     for (int i = 0; i < initialData.Length; i++)
     {
         if (i % 2 == 0)
@@ -168,6 +169,6 @@ static int[][] DeleteEvenRows(ref int[][] initialData)
         }
         if (i % 2 == 0) index++;
     }
-    return newArr;
+    initialData = newArr;
 }
 
