@@ -5,7 +5,7 @@ Console.WriteLine("Введіть масив для обробки");
 var arr = ReadJaggedRandom();
 while (e)
 {
-    Console.WriteLine("Введіть блок для виконання завдання ( 1 або 2 )");
+    Console.WriteLine("Введіть блок для виконання завдання ( 1, 2, 3 або 4 )");
     var num = Console.ReadLine();
     switch (num)
     {
@@ -14,6 +14,9 @@ while (e)
             break;
         case "2":
             Block_2_Alex(ref arr);
+            break;
+        case "3":
+            Block_2_Illia(ref arr);
             break;
         default:
             Console.WriteLine("Ви ввели щось не зрозуміле (((");
@@ -67,6 +70,21 @@ static void Block_2_Max(ref int[][] arr)
 {
     PrintJaggedArray(arr);
     z8(ref arr);
+    PrintJaggedArray(arr);
+}
+static void Block_2_Illia(ref int[][] arr)
+{
+    if (newArr == null || newArr.Length == 0)
+    {
+        Console.WriteLine("Масив порожній.");
+        return;
+    }
+    Console.WriteLine("Початковий масив:");
+    PrintJaggedArray(arr);
+
+    DeleteEvenRows(ref arr);
+
+    Console.WriteLine("Змінений масив(знищено парні рядки):");
     PrintJaggedArray(arr);
 }
 
@@ -130,25 +148,26 @@ static void DeleteRow(ref int[][] jagged, int k)
 
     jagged = newJagged;
 }
-//Illia method
-static int[][] (ref int[][] initialData)
+//Illia methods
+static int[][] DeleteEvenRows(ref int[][] initialData)
 {
     int index = 0;
-int[][] newArr = new int[initialData.Length / 2][];
-for (int i = 0; i < initialData.Length; i++)
-{
-    if (i % 2 == 0)
-    {
-        newArr[index] = new int[initialData[i].Length];
-    }
-    for (int j = 0; j < initialData[i].Length; j++)
+    int[][] newArr = new int[initialData.Length / 2][];
+    for (int i = 0; i < initialData.Length; i++)
     {
         if (i % 2 == 0)
         {
-            newArr[index][j] = initialData[i][j];
+            newArr[index] = new int[initialData[i].Length];
         }
+        for (int j = 0; j < initialData[i].Length; j++)
+        {
+            if (i % 2 == 0)
+            {
+                newArr[index][j] = initialData[i][j];
+            }
+        }
+        if (i % 2 == 0) index++;
     }
-    if (i % 2 == 0) index++;
+    return newArr;
 }
-return newArr;
-}
+
