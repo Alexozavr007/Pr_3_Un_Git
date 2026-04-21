@@ -1,7 +1,7 @@
 ﻿Console.OutputEncoding = System.Text.Encoding.UTF8;
 Console.InputEncoding = System.Text.Encoding.UTF8;
 bool e = true;
-Console.WriteLine("Введыть масив для обробки");
+Console.WriteLine("Введіть масив для обробки");
 var arr = ReadJaggedRandom();
 while (e)
 {
@@ -129,4 +129,26 @@ static void DeleteRow(ref int[][] jagged, int k)
     }
 
     jagged = newJagged;
+}
+//Illia method
+static int[][] (ref int[][] initialData)
+{
+    int index = 0;
+    int[][] newArr = new int[initialData.Length / 2][];
+    for (int i = 0; i < initialData.Length; i++)
+    {
+        if (i % 2 == 0)
+        {
+            newArr[index] = new int[initialData[i].Length];
+        }
+        for (int j = 0; j < initialData[i].Length; j++)
+        {
+            if (i % 2 == 0)
+            {
+                newArr[index][j] = initialData[i][j];
+            }
+        }
+        if (i % 2 == 0) index++;
+    }
+    return newArr;
 }
