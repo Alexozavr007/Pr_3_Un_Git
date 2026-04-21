@@ -148,7 +148,7 @@ static void DeleteRow(ref int[][] jagged, int k)
 
     jagged = newJagged;
 }
-//Illia methods
+//Illia method
 static void DeleteEvenRows(ref int[][] initialData)
 {
     int index = 0;
