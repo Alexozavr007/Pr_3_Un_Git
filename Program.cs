@@ -151,24 +151,16 @@ static void DeleteRow(ref int[][] jagged, int k)
 //Illia method
 static void DeleteEvenRows(ref int[][] initialData)
 {
-    int index = 0;
     int newSize = (initialData.Length + 1) / 2;
     int[][] newArr = new int[newSize][];
-    for (int i = 0; i < initialData.Length; i++)
+    int index = 0;
+
+    for (int i = 0; i < initialData.Length; i += 2) 
     {
-        if (i % 2 == 0)
-        {
-            newArr[index] = new int[initialData[i].Length];
-        }
-        for (int j = 0; j < initialData[i].Length; j++)
-        {
-            if (i % 2 == 0)
-            {
-                newArr[index][j] = initialData[i][j];
-            }
-        }
-        if (i % 2 == 0) index++;
+        newArr[index] = initialData[i]; 
+        index++;
     }
+
     initialData = newArr;
 }
 
