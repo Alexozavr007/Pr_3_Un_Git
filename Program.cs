@@ -18,6 +18,9 @@ while (e)
         case "3":
             Block_2_Illia(ref arr);
             break;
+        case "4":
+            Block_2_Sania(ref arr);
+            break;
         default:
             Console.WriteLine("Ви ввели щось не зрозуміле (((");
             break;
@@ -87,7 +90,29 @@ static void Block_2_Illia(ref int[][] arr)
     Console.WriteLine("Змінений масив(знищено парні рядки):");
     PrintJaggedArray(arr);
 }
+//Sania block
+static void Block_2_Sania(ref int[][] arr)
+{
+    if (arr == null || arr.Length == 0)
+    {
+        Console.WriteLine("Масив порожній.");
+        return;
+    }
 
+    Console.WriteLine("Початковий масив:");
+    PrintJaggedArray(arr);
+
+    Console.Write("Введіть K1: ");
+    int k1 = int.Parse(Console.ReadLine());
+
+    Console.Write("Введіть K2: ");
+    int k2 = int.Parse(Console.ReadLine());
+
+    DeleteRowsRange(ref arr, k1, k2);
+
+    Console.WriteLine("Масив після змін:");
+    PrintJaggedArray(arr);
+}
 //Alex methods
 static void RemoveEvenRows(ref int[][] arr) {
     int n = arr.Length;
@@ -162,5 +187,31 @@ static void DeleteEvenRows(ref int[][] initialData)
     }
 
     initialData = newArr;
+}
+//Sania methods
+static void DeleteRowsRange(ref int[][] arr, int k1, int k2)
+{
+    if (arr == null || arr.Length == 0)
+    {
+        Console.WriteLine("Масив порожній.");
+        return;
+    }
+
+    if (k1 < 0 || k2 >= arr.Length || k1 > k2)
+    {
+        Console.WriteLine("Неможливо виконати видалення. Один або декілька рядків не існують.");
+        return;
+    }
+
+    int deleteCount = k2 - k1 + 1;
+
+    for (int i = k2 + 1; i < arr.Length; i++)
+    {
+        arr[i - deleteCount] = arr[i];
+    }
+
+    Array.Resize(ref arr, arr.Length - deleteCount);
+
+    Console.WriteLine($"Успішно видалено {deleteCount} рядків.");
 }
 
