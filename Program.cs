@@ -207,7 +207,7 @@ static void DeleteRowsRange(ref int[][] arr, int k1, int k2)
 
     for (int i = k2 + 1; i < arr.Length; i++)
     {
-        arr[i - deleteCount] = arr[i];
+        arr[i - deleteCount] = arr[i]; //зсув масиву
     }
 
     Array.Resize(ref arr, arr.Length - deleteCount);
